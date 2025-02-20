@@ -47,4 +47,6 @@ Enter your move (row and column): 2 2
 
 ## License
 This project is open-source and available for learning purposes!
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
 

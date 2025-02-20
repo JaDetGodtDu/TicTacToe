@@ -81,6 +81,7 @@ function minMax(board, depth, isMaximizing, maxDepth) {
         }
         return bestScore;
     } else {
+        // Player's turn: The AI assumes the player seeks to minimize the score
         let bestScore = Infinity;
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
@@ -98,33 +99,35 @@ function minMax(board, depth, isMaximizing, maxDepth) {
 
 // Check for a winner, or tie
 function checkWinner(board) {
-    // Check rows, columns, and diagonals for a winning state
+    // Check rows and columns for a winning state
     for (let i = 0; i < 3; i++) {
       if (board[i][0] && board[i][0] === board[i][1] && board[i][0] === board[i][2]) {
-        return board[i][0];
+        return board[i][0]; // Row win
       }
       if (board[0][i] && board[0][i] === board[1][i] && board[0][i] === board[2][i]) {
-        return board[0][i];
+        return board[0][i]; // Column win
       }
     }
+    // Check diagonals for a winning state
     if (board[0][0] && board[0][0] === board[1][1] && board[0][0] === board[2][2]) {
-      return board[0][0];
+      return board[0][0]; // Left diagonal win
     }
     if (board[0][2] && board[0][2] === board[1][1] && board[0][2] === board[2][0]) {
-      return board[0][2];
+      return board[0][2]; // Right diagonal win
     }
   
-    // Check for a tie - if no empty spaces left
+    // Check for empty cells
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (board[i][j] === '') {
-          return null;
+          return null; // Empty cell = Game still in progress
         }
       }
     }
-    return 'tie';
+    return 'tie'; // No empty cells results in a tie
 }
 
+// Find the best move for the AI
 function bestMove(board) {
     let bestScore = -Infinity;
     let move;
@@ -132,7 +135,7 @@ function bestMove(board) {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (board[i][j] === '') {
-          board[i][j] = aiPlayer;
+          board[i][j] = aiPlayer; 
           let score = minMax(board, 0, false, maxDepth);
           board[i][j] = '';
           if (score > bestScore) {
