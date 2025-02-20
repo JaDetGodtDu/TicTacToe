@@ -10,6 +10,7 @@ const rl = readline.createInterface({
 const PLAYER_X = 'X';
 const PLAYER_O = 'O';
 
+// Variables to track whos turn it is, the user player and the AI player
 let currentPlayer;
 let userPlayer;
 let aiPlayer;
@@ -41,9 +42,9 @@ function evaluateBoard(board) {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (board[i][j] === PLAYER_X) {
-          score += fieldValues[i][j];
+          score += fieldValues[i][j]; // Increase score for PLAYER_X
         } else if (board[i][j] === PLAYER_O) {
-          score -= fieldValues[i][j];
+          score -= fieldValues[i][j]; // Decrease score for PLAYER_O
         }
       }
     }
@@ -53,8 +54,8 @@ function evaluateBoard(board) {
 // MinMax algorithm
 function minMax(board, depth, isMaximizing, maxDepth) {
     const scores = {
-      [aiPlayer]: 10,
-      [userPlayer]: -10,
+      [aiPlayer]: 10, // AI always wants to maximize the score - Was easier this way
+      [userPlayer]: -10, 
       tie: 0
     };
   
@@ -66,31 +67,32 @@ function minMax(board, depth, isMaximizing, maxDepth) {
     }
   
     if (isMaximizing) {
-      let bestScore = -Infinity;
-      for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-          if (board[i][j] === '') {
-            board[i][j] = aiPlayer;
-            let score = minMax(board, depth + 1, false, maxDepth);
-            board[i][j] = '';
-            bestScore = Math.max(score, bestScore); // Maximize the PLAYER_X score
-          }
+        // AI's turn: Try to get the highest score possible
+        let bestScore = -Infinity;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (board[i][j] === '') {
+                    board[i][j] = aiPlayer;
+                    let score = minMax(board, depth + 1, false, maxDepth);
+                    board[i][j] = '';
+                    bestScore = Math.max(score, bestScore); // Maximize the PLAYER_X score
+                }
+            }
         }
-      }
-      return bestScore;
+        return bestScore;
     } else {
-      let bestScore = Infinity;
-      for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-          if (board[i][j] === '') {
-            board[i][j] = userPlayer;
-            let score = minMax(board, depth + 1, true, maxDepth);
-            board[i][j] = '';
-            bestScore = Math.min(score, bestScore); // Minimize the PLAYER_O score
-          }
+        let bestScore = Infinity;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (board[i][j] === '') {
+                    board[i][j] = userPlayer;
+                    let score = minMax(board, depth + 1, true, maxDepth);
+                    board[i][j] = '';
+                    bestScore = Math.min(score, bestScore); // Minimize the PLAYER_O score
+                }
+            }
         }
-      }
-      return bestScore;
+        return bestScore;
     }
 }
 
