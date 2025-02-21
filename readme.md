@@ -25,6 +25,9 @@ Follow the on-screen prompts to choose your symbol and make moves.
 - Enter your move as row and column numbers (e.g., `2(row) 2(column)` for the center tile).
 - The game will announce the winner or if it ends in a tie.
 
+You can change the depthlimit of the MinMax algorithm, by changing the value of the `const depthLimit` variable on line 21 in app.js.
+You can also switch alpha/beta pruning on and off, using the `const alphaBeta` variable on line 24.
+
 ## Example Gameplay
 ```
 Do you want to play as X or O? X
