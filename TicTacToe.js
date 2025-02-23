@@ -219,12 +219,12 @@ function printBoard(board) {
 // ====================================================================================================
 // Game loop
 function startGame() {
-  console.log(`Welcome to Tic Tac Toe!\n`);
-  console.log(`Depthlimit is set to: ${depthLimit}`);
+  console.log(`\nWelcome to Tic Tac Toe!\n`);
+console.log(`Depthlimit is set to: \x1b[4m${depthLimit}\x1b[0m`);
   if(alphaBeta){
-    console.log(`Alpha-Beta pruning is enabled.\n`);
+    console.log(`Alpha-Beta pruning is \x1b[4menabled\x1b[0m.\n`);
   } else {
-    console.log(`Alpha-Beta pruning is disabled.\n`);
+    console.log(`Alpha-Beta pruning is \x1b[4mdisabled\x1b[0m.\n`);
   }
 	rl.question("Do you want to play as X or O? ", setupGame);
 }
