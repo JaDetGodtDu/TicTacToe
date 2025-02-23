@@ -205,7 +205,7 @@ function bestMove(board) {
 // ====================================================================================================
 // UI
 function printBoard(board) {
-	console.log("---------");
+	console.log("\n---------");
 	for (let i = 0; i < board.length; i++) {
 		let row = board[i].map((cell) => (cell === "" ? " " : cell));
 		console.log(row.join(" | ")); // Row content
@@ -213,7 +213,7 @@ function printBoard(board) {
 			console.log("---------");
 		}
 	}
-	console.log("---------");
+	console.log("---------\n");
 }
 
 // ====================================================================================================
@@ -256,7 +256,7 @@ function handleUserMove(input) {
 		board[i][j] = userPlayer;
 		checkGameOver();
 	} else {
-		console.log("Invalid move. Try again.");
+		console.log("\nInvalid move. Try again.");
 		makeMove();
 	}
 }
