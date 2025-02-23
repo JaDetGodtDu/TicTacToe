@@ -4,7 +4,7 @@ This is a simple command-line Tic-Tac-Toe game built in JavaScript using Node.js
 The AI opponent uses the MinMax algorithm to make the best moves possible.
 
 ## Setup
-### Prerequisites
+### ! Prerequisites
 Make sure you have [Node.js](https://nodejs.org/) installed on your system.
 
 ### Installation
